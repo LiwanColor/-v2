@@ -1,0 +1,1473 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liwan — Color Studio</title>
+
+<style>
+  @font-face {
+  font-family: 'TheYearofHandicrafts';
+  src: url('TheYearofHandicrafts-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+button,
+select,
+input,
+textarea {
+  font-family: 'TheYearofHandicrafts', sans-serif !important;
+}
+  * {
+  font-family: 'TheYearofHandicrafts', sans-serif !important;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:#f7f5f0;
+  color:#25231f;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.wrap{
+  width:min(1380px,calc(100% - 60px));
+  margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  height:105px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #ddd8cf;
+}
+
+.brand{
+  direction:ltr;
+  font-family:Georgia,serif;
+  font-size:38px;
+  font-style:italic;
+  letter-spacing:-1px;
+  color:#28241f;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+.header-label{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#918a80;
+  direction:ltr;
+}
+
+.catalog-count{
+  font-size:11px;
+  color:#777168;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  padding:55px 0 35px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+}
+
+.hero-title{
+  margin:0;
+  font-family:Georgia,serif;
+  font-size:64px;
+  font-weight:normal;
+  line-height:.95;
+  letter-spacing:-2px;
+  color:#27231f;
+}
+
+.hero-title em{
+  color:#9a7145;
+}
+
+.hero-text{
+  width:390px;
+  margin:0;
+  color:#817a72;
+  font-size:12px;
+  line-height:2;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 390px;
+  gap:35px;
+  align-items:start;
+}
+
+/* =========================
+   PRODUCT
+========================= */
+
+.product-card{
+  background:#ebe8e1;
+  position:relative;
+  min-height:700px;
+  overflow:hidden;
+}
+
+.product-card:before{
+  content:"LIWAN";
+  position:absolute;
+  top:25px;
+  left:28px;
+  font-family:Georgia,serif;
+  font-style:italic;
+  font-size:11px;
+  letter-spacing:3px;
+  color:#aaa49b;
+  z-index:2;
+}
+
+.product-card img{
+  display:block;
+  width:100%;
+  height:700px;
+  object-fit:contain;
+  background:#ebe8e1;
+}
+
+.product-info{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid rgba(0,0,0,.08);
+  overflow:hidden;
+}
+
+.info-item{
+  min-height:92px;
+  padding:18px 25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  transition:background-color .3s ease;
+}
+
+.info-item:first-child{
+  border-left:1px solid rgba(0,0,0,.12);
+}
+
+.info-label{
+  display:block;
+  font-family:Arial,sans-serif !important;
+  font-size:8px;
+  letter-spacing:2.5px;
+  margin-bottom:8px;
+  direction:ltr;
+  font-weight:500;
+}
+
+.info-name{
+  font-size:13px;
+  font-weight:500;
+}
+
+.info-label{
+  display:block;
+  font-size:8px;
+  letter-spacing:2px;
+  color:#a27a4d;
+  margin-bottom:7px;
+  direction:ltr;
+}
+
+.info-name{
+  font-size:12px;
+}
+
+/* =========================
+   CONTROL PANEL
+========================= */
+
+.panel{
+  background:#fffefa;
+  border:1px solid #ded9d1;
+  padding:35px;
+  position:sticky;
+  top:20px;
+}
+
+.panel-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:30px;
+}
+
+.panel-number{
+  font-family:Georgia,serif;
+  font-size:14px;
+  color:#aaa197;
+  direction:ltr;
+}
+
+.panel h2{
+  margin:0 0 8px;
+  font-family:Georgia,serif;
+  font-size:30px;
+  font-weight:normal;
+}
+
+.panel-sub{
+  margin:0;
+  color:#898178;
+  font-size:11px;
+  line-height:1.9;
+}
+
+/* =========================
+   COLOR SELECT
+========================= */
+
+.color-section{
+  margin-top:30px;
+}
+
+.color-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.color-title{
+  font-size:11px;
+  font-weight:bold;
+}
+
+.color-code{
+  direction:ltr;
+  font-family:monospace;
+  font-size:10px;
+  color:#9b948b;
+}
+
+.color-preview{
+  height:75px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  border:1px solid #ded9d1;
+  padding:10px;
+  background:#faf9f5;
+}
+
+.big-swatch{
+  width:54px;
+  height:54px;
+  flex-shrink:0;
+  border:1px solid rgba(0,0,0,.12);
+}
+
+.color-details{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.color-name{
+  font-size:12px;
+}
+
+.color-small{
+  direction:ltr;
+  font-family:monospace;
+  font-size:9px;
+  color:#9b948b;
+}
+
+/* =========================
+   SELECT
+========================= */
+
+.select-wrap{
+  position:relative;
+  margin-top:8px;
+}
+
+select{
+  width:100%;
+  height:42px;
+  padding:0 12px;
+  border:1px solid #d9d3ca;
+  background:#fff;
+  color:#302c27;
+  font-size:11px;
+  font-family:inherit;
+  outline:none;
+  cursor:pointer;
+  appearance:auto;
+}
+
+select:focus{
+  border-color:#a27a4d;
+}
+
+.swap-colors{
+  width:100%;
+  height:44px;
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  border:1px solid #d9d3ca;
+  background:#fff;
+  color:#302c27;
+  font-size:10px;
+  cursor:pointer;
+  transition:.25s ease;
+}
+.swap-colors:hover{background:#29251f;color:#fff;border-color:#29251f;}
+.swap-icon{font-family:Arial,sans-serif!important;font-size:18px;line-height:1;direction:ltr;}
+
+/* =========================
+   COMBINATION
+========================= */
+
+.combo-box{
+  margin-top:30px;
+  padding:20px 0;
+  border-top:1px solid #ddd8d0;
+  border-bottom:1px solid #ddd8d0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.combo-label{
+  color:#918a81;
+  font-size:10px;
+}
+
+.combo-value{
+  direction:ltr;
+  font-family:Georgia,serif;
+  font-size:22px;
+  color:#29251f;
+}
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+.download{
+  margin-top:22px;
+  width:100%;
+  height:50px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#29251f;
+  color:#fff;
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:.5px;
+  transition:.25s;
+}
+
+.download:hover{
+  background:#9a7145;
+}
+
+.download span{
+  margin-left:10px;
+  font-size:15px;
+}
+
+/* =========================
+   PALETTE
+========================= */
+
+.palette{
+  margin-top:80px;
+  padding:45px 0 55px;
+  border-top:1px solid #ddd8cf;
+}
+
+.palette-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  margin-bottom:30px;
+}
+
+.palette-title{
+  margin:0;
+  font-family:Georgia,serif;
+  font-size:32px;
+  font-weight:normal;
+}
+
+.palette-description{
+  margin:0;
+  color:#918a81;
+  font-size:10px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(20,1fr);
+  gap:8px;
+}
+
+.palette-item{
+  border:0;
+  background:none;
+  padding:0;
+  cursor:pointer;
+  text-align:center;
+  color:#817a72;
+  font-family:inherit;
+}
+
+.palette-item .swatch{
+  display:block;
+  width:100%;
+  aspect-ratio:1;
+  border:1px solid rgba(0,0,0,.1);
+  transition:.25s;
+}
+
+.palette-item:hover .swatch{
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,.12);
+}
+
+.palette-item.active .swatch{
+  outline:2px solid #9a7145;
+  outline-offset:3px;
+}
+
+.palette-item .num{
+  display:block;
+  margin-top:8px;
+  font-size:8px;
+  direction:ltr;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  border-top:1px solid #ddd8cf;
+  padding:25px 0;
+  display:flex;
+  justify-content:space-between;
+  color:#999188;
+  font-size:9px;
+  letter-spacing:1px;
+}
+
+.footer-brand{
+  direction:ltr;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1050px){
+
+  .wrap{
+    width:min(100% - 35px,900px);
+  }
+
+  main{
+    grid-template-columns:1fr;
+  }
+
+  .panel{
+    position:relative;
+    top:auto;
+  }
+
+  .product-card,
+  .product-card img{
+    min-height:600px;
+    height:600px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(10,1fr);
+  }
+}
+
+@media(max-width:650px){
+
+  .wrap{
+    width:calc(100% - 25px);
+  }
+
+  header{
+    height:80px;
+  }
+
+  .brand{
+    font-size:30px;
+  }
+
+  .header-right{
+    gap:10px;
+  }
+
+  .header-label{
+    display:none;
+  }
+
+  .hero{
+    padding:35px 0 25px;
+    display:block;
+  }
+
+  .hero-title{
+    font-size:45px;
+    margin-bottom:20px;
+  }
+
+  .hero-text{
+    width:auto;
+  }
+
+  main{
+    gap:20px;
+  }
+
+  .product-card,
+  .product-card img{
+    min-height:450px;
+    height:450px;
+  }
+
+  .product-info{
+    padding:14px 8px;
+  }
+
+  .info-item{
+    padding:0 10px;
+  }
+
+  .panel{
+    padding:25px 20px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
+  }
+
+  .palette{
+    margin-top:50px;
+    padding-top:30px;
+  }
+
+  .palette-head{
+    display:block;
+  }
+
+  .palette-description{
+    margin-top:8px;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+
+@media(max-width:400px){
+
+  .grid{
+    grid-template-columns:repeat(6,1fr);
+  }
+
+  .hero-title{
+    font-size:40px;
+  }
+}
+
+/* =========================================================
+   LIWAN COLOR STUDIO — REFERENCE DESIGN OVERRIDE
+   Matches the current Liwan Color Studio design
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap');
+
+/* Global font */
+html, body, body *, button, select, input, textarea{
+  font-family:'El Messiri',sans-serif !important;
+}
+
+/* Full-screen background */
+html, body{
+  min-height:100%;
+}
+
+body{
+  margin:0 !important;
+  overflow-x:hidden;
+  background:#e9e3db url("liwan-background.png") center center / cover fixed no-repeat !important;
+  color:#292824 !important;
+}
+
+.wrap{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 3.5vw !important;
+}
+
+/* Hide the old page sections not used in the new compact design */
+header,
+.hero,
+.palette,
+footer,
+.product-info,
+.panel-top,
+.panel .combo-box,
+.panel .combo,
+.panel .download{
+  display:none !important;
+}
+
+/* Main layout: controls left, product right */
+main{
+  width:100% !important;
+  min-height:100vh !important;
+  margin:0 !important;
+  padding:0 !important;
+  display:grid !important;
+  grid-template-columns:360px minmax(0,1fr) !important;
+  gap:42px !important;
+  align-items:center !important;
+  direction:ltr !important;
+}
+
+/* Controls */
+.panel{
+  grid-column:1 !important;
+  grid-row:1 !important;
+  width:360px !important;
+  padding:0 !important;
+  margin:0 !important;
+  position:relative !important;
+  top:auto !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  direction:rtl !important;
+  transform:translate(140px, 30px) !important;}
+
+/* Each color row becomes the black rounded box */
+.color-section{
+  width:100% !important;
+  height:64px !important;
+  margin:0 0 12px 0 !important;
+  padding:8px 10px !important;
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  gap:14px !important;
+  background:#111112 !important;
+  border:0 !important;
+  border-radius:12px !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.15) !important;
+  direction:rtl !important;
+}
+
+/* Right-side title */
+.color-head{
+  order:1 !important;
+  width:105px !important;
+  min-width:105px !important;
+  margin:0 !important;
+  padding:0 !important;
+  display:block !important;
+}
+
+.color-title{
+  display:block !important;
+  margin:0 !important;
+  color:#fff !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  white-space:nowrap !important;
+  text-align:right !important;
+}
+
+.color-code{
+  display:none !important;
+}
+
+/* Hide the preview blocks from the old design */
+.color-preview{
+  display:none !important;
+}
+
+/* Select */
+.select-wrap{
+  order:2 !important;
+  flex:1 !important;
+  min-width:0 !important;
+  margin:0 !important;
+  position:relative !important;
+}
+
+.color-section select{
+  width:100% !important;
+  height:46px !important;
+  min-width:0 !important;
+  padding:0 14px 0 40px !important;
+  border:0 !important;
+  border-radius:9px !important;
+  background:#1c1c1c !important;
+  color:#fff !important;
+  font-family:'El Messiri',sans-serif !important;
+  font-size:13px !important;
+  outline:none !important;
+  cursor:pointer !important;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  direction:rtl !important;
+}
+
+.color-section select:focus{
+  background:#222 !important;
+  box-shadow:0 0 0 1px #A98A42 !important;
+}
+
+/* Custom dropdown arrow on the left */
+.select-wrap::before{
+  content:"⌄";
+  position:absolute;
+  left:13px;
+  top:50%;
+  transform:translateY(-58%);
+  color:#fff;
+  font-family:Arial,sans-serif !important;
+  font-size:22px;
+  line-height:1;
+  pointer-events:none;
+  z-index:3;
+}
+
+/* Swap button */
+.swap-colors{
+  width:100% !important;
+  height:48px !important;
+  margin:0 0 0 0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  border:0 !important;
+  border-radius:12px !important;
+  background:#111112 !important;
+  color:#fff !important;
+  font-family:'El Messiri',sans-serif !important;
+  font-size:14px !important;
+  font-weight:600 !important;
+  cursor:pointer !important;
+  transition:color .25s ease, transform .2s ease !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.15) !important;
+  position:relative !important;
+  overflow:hidden !important;
+  isolation:isolate;
+}
+
+.swap-colors::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:0%;
+  height:100%;
+  background:#B38A3B;
+  transition:width .4s ease;
+  z-index:-1;
+}
+
+.swap-colors:hover::before{
+  width:100%;
+}
+
+.swap-colors:hover{
+  color:#fff !important;
+  transform:translateY(-1px) !important;
+  border-color:transparent !important;
+  background:#111112 !important;
+}
+
+.swap-icon{
+  font-family:Arial,sans-serif !important;
+  font-size:18px !important;
+  line-height:1 !important;
+}
+
+/* Product area */
+main > section{
+  grid-column:2 !important;
+  grid-row:1 !important;
+  min-width:0 !important;
+  width:100% !important;
+  height:100vh !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  direction:ltr !important;
+}
+
+.product-card{
+  width:min(700px,100%) !important;
+  height:100vh !important;
+  min-height:0 !important;
+  position:relative !important;
+  overflow:visible !important;
+  background:transparent !important;
+  transform:translateX(-60px) !important;
+}
+
+.product-card::before{
+  display:none !important;
+}
+
+.product-card img{
+  display:block !important;
+  width:100% !important;
+  height:100vh !important;
+  min-height:0 !important;
+  object-fit:contain !important;
+  background:transparent !important;
+  opacity:.95 !important;
+  filter:drop-shadow(0 20px 22px #00000018) !important;
+  transform:translateX(79px);
+
+}
+
+/* Mobile */
+@media(max-width:900px){
+  body{
+    background-attachment:scroll !important;
+  }
+
+  main{
+    min-height:auto !important;
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+    padding:12px 0 24px !important;
+  }
+
+  main > section{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    order:-1 !important;
+    height:55vh !important;
+  }
+
+  .product-card{
+    width:100% !important;
+    height:55vh !important;
+    transform:none !important;
+  }
+
+  .product-card img{
+    height:55vh !important;
+  }
+
+  .panel{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    width:min(360px,100%) !important;
+    margin:0 auto !important;
+    transform:none !important;
+  }
+}
+
+@media(max-width:520px){
+  .wrap{
+    padding:0 12px !important;
+  }
+
+  main > section,
+  .product-card,
+  .product-card img{
+    height:46vh !important;
+    min-height:280px !important;
+  }
+
+  .panel{
+    width:100% !important;
+  }
+}
+
+
+/* FINAL PRODUCT SIZE */
+#product{
+  width:128% !important;
+  height:128% !important;
+  object-fit:contain !important;
+  filter:drop-shadow(0 20px 22px #00000018) !important;
+  display:block !important;
+  max-width:none !important;
+  max-height:none !important;
+  transform:translate(79px, -80px);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+
+
+
+
+<main>
+
+<!-- PRODUCT -->
+
+<section>
+
+  <div class="product-card">
+
+    <img id="product" alt="سترة Liwan">
+
+    <div class="product-info">
+
+      <div class="info-item">
+        <span class="info-label">OUTER FABRIC</span>
+        <div class="info-name" id="outerName"></div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-label">INNER FABRIC</span>
+        <div class="info-name" id="innerName"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PANEL -->
+
+<aside class="panel">
+
+  <div class="panel-top">
+
+    <div>
+      <h2>أختر ألوانك</h2>
+      <p class="panel-sub">
+        اختر لونين وشاهد النتيجة فوراً.
+      </p>
+    </div>
+
+    <div class="panel-number">01 / 20</div>
+
+  </div>
+
+
+  <!-- OUTER -->
+
+  <div class="color-section">
+
+    <div class="color-head">
+      <label class="color-title">اللون الخارجي</label>
+      <span id="outerCode" class="color-code"></span>
+    </div>
+
+    <div class="color-preview">
+
+      <div id="outerSwatch" class="big-swatch"></div>
+
+      <div class="color-details">
+        <span id="outerChosen" class="color-name"></span>
+        <span id="outerHex" class="color-small"></span>
+      </div>
+
+    </div>
+
+    <div class="select-wrap">
+      <select id="outer"></select>
+    </div>
+
+  </div>
+
+
+  <!-- INNER -->
+
+  <div class="color-section">
+
+    <div class="color-head">
+      <label class="color-title">اللون الداخلي</label>
+      <span id="innerCode" class="color-code"></span>
+    </div>
+
+    <div class="color-preview">
+
+      <div id="innerSwatch" class="big-swatch"></div>
+
+      <div class="color-details">
+        <span id="innerChosen" class="color-name"></span>
+        <span id="innerHex" class="color-small"></span>
+      </div>
+
+    </div>
+
+    <div class="select-wrap">
+      <select id="inner"></select>
+    </div>
+
+  </div>
+
+
+  <!-- SWAP COLORS -->
+
+  <button type="button" id="swapColors" class="swap-colors" aria-label="تبديل اللون الخارجي والداخلي">
+    <span class="swap-icon">⇄</span>
+    <span>تـبـديـل الألــوان</span>
+  </button>
+
+  <!-- COMBO -->
+  <div class="combo">
+  </div>
+
+  <!-- DOWNLOAD -->
+
+  <a id="download" class="download" download>
+    <span>↓</span>
+    تحميل الصورة الحالية
+  </a>
+
+</aside>
+
+</main>
+
+
+<!-- PALETTE -->
+
+  <img id="palette" class="grid">
+
+
+</div>
+
+
+<script>
+
+const raw =
+'00|off_white_beige|أوف وايت بيج|#B8B6AA;' +
+'01|off_white_beige|أوف وايت بيج|#B8B6AA;' +
+'02|warm_beige|بيج دافئ|#B2AD99;' +
+'03|greige|بيج رمادي|#A09C89;' +
+'04|taupe|تاوب بني رمادي|#8D826E;' +
+'05|medium_gray_beige|رمادي بيج متوسط|#827C70;' +
+'06|dark_brown_gray|بني رمادي داكن|#716A5A;' +
+'07|dark_wood_brown|بني خشبي داكن|#58402D;' +
+'08|brown_black|بني أسود|#251C17;' +
+'09|mustard_gold|خردلي ذهبي|#6E4B22;' +
+'10|burgundy|عنابي نبيذي|#2B1518;' +
+'11|dark_olive|أخضر زيتي داكن|#333924;' +
+'12|blue_gray|أزرق رمادي بترولي|#6A7B73;' +
+'13|dark_blue_gray|أزرق رمادي داكن|#232936;' +
+'14|deep_navy|كحلي شديد الغمقان|#111520;' +
+'15|gray_off_white|أوف وايت رمادي|#ABABA3;' +
+'16|warm_light_gray|رمادي فاتح دافئ|#99968F;' +
+'17|medium_gray|رمادي متوسط|#605F5D;' +
+'18|charcoal|فحمي داكن|#212226;' +
+'19|black|أسود|#111112';
+
+
+const colors = raw.split(';').map(x => {
+
+  let [id,slug,name,hex] = x.split('|');
+
+  return {
+    id,
+    slug,
+    name,
+    hex,
+    displayId: String(Number(id) + 1).padStart(2, '0')
+  };
+
+});
+
+
+let outer = 4;
+let inner = 13;
+
+const $ = id => document.getElementById(id);
+
+
+/* =========================
+   CONTRAST
+========================= */
+
+function getContrastColor(hex){
+
+  hex = hex.replace('#','');
+
+  const r = parseInt(hex.substring(0,2),16);
+  const g = parseInt(hex.substring(2,4),16);
+  const b = parseInt(hex.substring(4,6),16);
+
+  const brightness =
+    ((r * 299) + (g * 587) + (b * 114)) / 1000;
+
+  return brightness > 150 ? '#2b2723' : '#ffffff';
+}
+
+
+/* =========================
+   SELECT OPTIONS
+========================= */
+
+function opt(el){
+
+  el.innerHTML = colors.map(c => `
+    <option value="${c.id}">
+      ${c.displayId} — ${c.name}  ${c.hex}
+    </option>
+  `).join('');
+
+}
+
+
+/* =========================
+   UPDATE PAGE
+========================= */
+
+function current(){
+
+  const o = colors.find(c => +c.id === outer);
+  const i = colors.find(c => +c.id === inner);
+
+  if(!o || !i) return;
+
+
+  /* تحديد اللون داخل القوائم */
+
+  $('outer').value = String(o.id);
+  $('inner').value = String(i.id);
+
+
+  /* اسم ملف الصورة */
+
+  let file =
+    `outer_${o.id}_${o.slug}__inner_${i.id}_${i.slug}.jpg`;
+
+  /* ملفات اللون الخارجي رقم 01 (ID الداخلي 00)
+     اسم المجلد يستخدم charcoal بدل off_white_beige */
+  if(o.id === '00'){
+    const innerSlugForOuter00 = {
+      '01': 'off_white_beige',
+      '02': 'warm_beige',
+      '03': 'greige',
+      '04': 'taupe',
+      '05': 'medium_gray_beige',
+      '06': 'dark_brown_gray',
+      '07': 'dark_wood_brown',
+      '08': 'brown_black',
+      '09': 'mustard_gold',
+      '10': 'burgundy',
+      '11': 'dark_olive',
+      '12': 'blue_gray',
+      '13': 'dark_blue_gray',
+      '14': 'deep_navy',
+      '15': 'gray_off_white',
+      '16': 'warm_light_gray',
+      '17': 'medium_gray',
+      '18': 'medium_gray',
+      '19': 'medium_gray'
+    };
+
+    const innerSlug = innerSlugForOuter00[i.id] || i.slug;
+    file = `outer_00_charcoal__inner_${i.id}_${innerSlug}.jpg`;
+  }
+
+
+  /* الصورة */
+
+  const product = $('product');
+
+  product.src = 'images/' + file;
+
+  product.alt =
+    `سترة Liwan — خارجي ${o.name} وداخلي ${i.name}`;
+
+
+  /* الأسماء */
+
+  $('outerName').textContent = o.name;
+  $('innerName').textContent = i.name;
+
+
+  /* =========================
+     OUTER
+  ========================= */
+
+  $('outerChosen').textContent =
+    `${o.displayId} · ${o.name}`;
+
+  $('outerHex').textContent =
+    o.hex;
+
+  $('outerCode').textContent =
+    o.displayId;
+
+  $('outerSwatch').style.backgroundColor =
+    o.hex;
+
+
+  /* =========================
+     INNER
+  ========================= */
+
+  $('innerChosen').textContent =
+    `${i.displayId} · ${i.name}`;
+
+  $('innerHex').textContent =
+    i.hex;
+
+  $('innerCode').textContent =
+    i.displayId;
+
+  $('innerSwatch').style.backgroundColor =
+    i.hex;
+
+
+  /* =========================
+     COLORS UNDER PRODUCT
+  ========================= */
+
+  const items =
+    document.querySelectorAll('.info-item');
+
+  if(items.length >= 2){
+
+    items[0].style.backgroundColor = o.hex;
+    items[1].style.backgroundColor = i.hex;
+
+    const outerText =
+      getContrastColor(o.hex);
+
+    const innerText =
+      getContrastColor(i.hex);
+
+    items[0].style.color = outerText;
+    items[1].style.color = innerText;
+
+    const outerLabel =
+      items[0].querySelector('.info-label');
+
+    const innerLabel =
+      items[1].querySelector('.info-label');
+
+    if(outerLabel)
+      outerLabel.style.color = outerText;
+
+    if(innerLabel)
+      innerLabel.style.color = innerText;
+  }
+
+
+  /* =========================
+     COMBINATION
+  ========================= */
+
+  $('combo').textContent =
+    `${o.displayId} + ${i.displayId}`;
+
+
+  /* =========================
+     DOWNLOAD
+  ========================= */
+
+  $('download').href =
+    'images/' + file;
+
+  $('download').download =
+    file;
+
+
+  /* =========================
+     ACTIVE PALETTE
+  ========================= */
+
+  document
+    .querySelectorAll('.palette-item')
+    .forEach(b => {
+
+      b.classList.toggle(
+        'active',
+        +b.dataset.id === outer
+      );
+
+    });
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+opt($('outer'));
+opt($('inner'));
+
+
+/* مهم جداً:
+   تحديد القيم قبل تشغيل current
+*/
+
+$('outer').value = String(outer);
+$('inner').value = String(inner);
+
+
+/* =========================
+   EVENTS
+========================= */
+
+$('outer').addEventListener('change', function(){
+
+  outer = Number(this.value);
+
+  current();
+
+});
+
+
+$('inner').addEventListener('change', function(){
+
+  inner = Number(this.value);
+
+  current();
+
+});
+
+
+/* =========================
+   SWAP COLORS
+========================= */
+
+$('swapColors').addEventListener('click', function(){
+
+  const selectedOuter = Number($('outer').value);
+  const selectedInner = Number($('inner').value);
+
+  outer = selectedInner;
+  inner = selectedOuter;
+
+  $('outer').value = String(outer);
+  $('inner').value = String(inner);
+
+  current();
+
+});
+
+
+/* =========================
+   PALETTE
+========================= */
+
+$('palette').innerHTML =
+  colors.map(c => `
+
+    <button
+      class="palette-item"
+      data-id="${c.id}"
+      title="تطبيق ${c.name} كخارجية"
+    >
+
+      <span
+        class="swatch"
+        style="background:${c.hex}"
+      ></span>
+
+      <span class="num">
+        ${c.displayId}
+      </span>
+
+    </button>
+
+  `).join('');
+
+
+document
+  .querySelectorAll('.palette-item')
+  .forEach(b => {
+
+    b.addEventListener('click', function(){
+
+      outer = Number(this.dataset.id);
+
+      $('outer').value = String(outer);
+
+      current();
+
+    });
+
+  });
+
+
+/* =========================
+   START WITH DEFAULT COLORS
+========================= */
+
+window.addEventListener('DOMContentLoaded', function(){
+
+  outer = 4;
+  inner = 13;
+
+  $('outer').value = '4';
+  $('inner').value = '13';
+
+  current();
+
+});
+</script>
+
+</body>
+</html>

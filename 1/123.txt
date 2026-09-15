@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liwan — Color Studio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap');
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#eee9e1;
+  color:#302b26;
+  font-family:'Noto Kufi Arabic',Tahoma,Arial,sans-serif;
+}
+
+/* الصفحة */
+
+.wrap{
+  max-width:1180px;
+  margin:auto;
+  padding:30px;
+}
+
+/* الهيدر */
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #d8d0c5;
+  padding:5px 0 24px;
+}
+
+.brand{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:42px;
+  font-style:italic;
+  font-weight:500;
+  letter-spacing:-1px;
+  color:#29241f;
+}
+
+.status{
+  font-family:'Noto Kufi Arabic',Tahoma,sans-serif;
+  font-size:10px;
+  color:#8a8176;
+  letter-spacing:.3px;
+}
+
+/* المحتوى الرئيسي */
+
+main{
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:34px;
+  align-items:start;
+  padding:48px 0;
+}
+
+/* صورة المنتج */
+
+.preview{
+  background:#e4ded5;
+  box-shadow:0 20px 50px rgba(57,43,28,.10);
+}
+
+.preview img{
+  display:block;
+  width:100%;
+  max-height:760px;
+  object-fit:contain;
+  background:#e4ded5;
+}
+
+/* معلومات الصورة */
+
+.caption{
+  display:flex;
+  justify-content:center;
+  gap:50px;
+  background:#f8f5ef;
+  padding:18px;
+  font-family:'Noto Kufi Arabic',Tahoma,sans-serif;
+  font-size:11px;
+}
+
+.caption span{
+  color:#a17b54;
+  font-family:Arial,sans-serif;
+  font-size:8px;
+  letter-spacing:2px;
+  display:block;
+  margin-bottom:5px;
+  direction:ltr;
+}
+
+.caption b{
+  font-weight:400;
+}
+
+/* لوحة التحكم */
+
+.panel{
+  background:#f8f5ef;
+  border:1px solid #ddd5ca;
+  border-radius:4px;
+  padding:28px;
+  box-shadow:0 12px 35px rgba(57,43,28,.07);
+}
+
+/* العناوين */
+
+h1{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:54px;
+  font-style:italic;
+  font-weight:500;
+  color:#9a7048;
+  margin:0 0 8px;
+  line-height:1;
+}
+
+h2{
+  margin:0 0 8px;
+  font-family:'Noto Kufi Arabic',Tahoma,sans-serif;
+  font-size:18px;
+  font-weight:500;
+  color:#302b26;
+}
+
+.sub{
+  color:#81786d;
+  font-size:10px;
+  line-height:2.1;
+  margin:0 0 30px;
+  font-weight:300;
+}
+
+/* الحقول */
+
+.field{
+  margin:20px 0;
+}
+
+label{
+  display:block;
+  font-size:10px;
+  font-weight:500;
+  color:#4b433b;
+  margin-bottom:9px;
+}
+
+select{
+  width:100%;
+  height:45px;
+  padding:0 13px;
+  border:1px solid #d6cec3;
+  border-radius:3px;
+  background:#fcfaf6;
+  color:#403932;
+  font-family:'Noto Kufi Arabic',Tahoma,sans-serif;
+  font-size:10px;
+  outline:none;
+  cursor:pointer;
+  transition:.2s;
+}
+
+select:hover,
+select:focus{
+  border-color:#a17b54;
+}
+
+/* اللون المختار */
+
+.chosen{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin-top:10px;
+  font-size:9px;
+  color:#81786d;
+}
+
+.swatch{
+  width:32px;
+  height:32px;
+  border-radius:3px;
+  border:1px solid rgba(60,45,30,.14);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+/* التركيبة */
+
+.combo{
+  border-top:1px solid #ddd5ca;
+  margin-top:27px;
+  padding-top:17px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:#877e74;
+  font-size:9px;
+}
+
+.combo b{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:22px;
+  font-weight:500;
+  color:#302b26;
+  direction:ltr;
+}
+
+/* التحميل */
+
+.download{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:21px;
+  height:43px;
+  color:#6f5136;
+  border:1px solid #cbbba8;
+  text-decoration:none;
+  font-family:'Noto Kufi Arabic',Tahoma,sans-serif;
+  font-size:9px;
+  transition:.25s;
+}
+
+.download:hover{
+  background:#302b26;
+  border-color:#302b26;
+  color:#fff;
+}
+
+/* لوحة الألوان */
+
+.palette{
+  border-top:1px solid #d8d0c5;
+  padding:34px 0 28px;
+}
+
+.palette h2{
+  margin-bottom:22px;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:29px;
+  font-weight:500;
+  color:#302b26;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(19,1fr);
+  gap:8px;
+}
+
+/* أزرار الألوان */
+
+button{
+  border:0;
+  background:none;
+  padding:0;
+  cursor:pointer;
+  color:#81786d;
+  font-family:Arial,sans-serif;
+  font-size:8px;
+}
+
+button .swatch{
+  width:100%;
+  aspect-ratio:1;
+  border-radius:3px;
+  margin-bottom:6px;
+  transition:.25s ease;
+}
+
+button:hover .swatch{
+  transform:translateY(-3px);
+  box-shadow:0 7px 14px rgba(50,38,25,.13);
+}
+
+button.active .swatch{
+  outline:2px solid #eee9e1;
+  box-shadow:
+    0 0 0 3px #9a7048,
+    0 7px 15px rgba(50,38,25,.12);
+}
+
+/* الفوتر */
+
+footer{
+  border-top:1px solid #d8d0c5;
+  padding:21px 0;
+  color:#9a9186;
+  font-family:Arial,sans-serif;
+  font-size:8px;
+  letter-spacing:1px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* تابلت */
+
+@media(max-width:800px){
+
+  .wrap{
+    padding:22px;
+  }
+
+  main{
+    grid-template-columns:1fr;
+    padding-top:30px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(10,1fr);
+  }
+
+  h1{
+    font-size:46px;
+  }
+
+  .panel{
+    padding:24px;
+  }
+}
+
+/* جوال */
+
+@media(max-width:450px){
+
+  .wrap{
+    padding:15px;
+  }
+
+  header{
+    padding-bottom:18px;
+  }
+
+  .brand{
+    font-size:34px;
+  }
+
+  .status{
+    font-size:8px;
+  }
+
+  main{
+    gap:20px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
+  }
+
+  h1{
+    font-size:43px;
+  }
+
+  .caption{
+    gap:30px;
+  }
+
+  footer{
+    font-size:7px;
+    gap:10px;
+  }
+}
+</style></head>
+
+<body>
+
+<div class="wrap">
+
+<header>
+
+  <div class="brand">Liwan</div>
+
+  <div class="header-right">
+    <div class="header-label">COLOR STUDIO</div>
+    <div class="catalog-count">19 × 19</div>
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <h1 class="hero-title">
+    اصنع <em>لونك.</em>
+  </h1>
+
+  <p class="hero-text">
+    اختر القماش الخارجي والبطانة الداخلية،
+    وشاهد تركيبتك على المنتج مباشرة.
+    تجربة Liwan لاختيار اللون المناسب لك.
+  </p>
+
+</section>
+
+
+<main>
+
+<!-- PRODUCT -->
+
+<section>
+
+  <div class="product-card">
+
+    <img id="product" alt="سترة Liwan">
+
+    <div class="product-info">
+
+      <div class="info-item">
+        <span class="info-label">OUTER FABRIC</span>
+        <div class="info-name" id="outerName"></div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-label">INNER FABRIC</span>
+        <div class="info-name" id="innerName"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PANEL -->
+
+<aside class="panel">
+
+  <div class="panel-top">
+
+    <div>
+      <h2>كوّن التوليفة</h2>
+      <p class="panel-sub">
+        اختر لونين وشاهد النتيجة فوراً.
+      </p>
+    </div>
+
+    <div class="panel-number">01 / 19</div>
+
+  </div>
+
+
+  <!-- OUTER -->
+
+  <div class="color-section">
+
+    <div class="color-head">
+      <label class="color-title">اللون الخارجي</label>
+      <span id="outerCode" class="color-code"></span>
+    </div>
+
+    <div class="color-preview">
+
+      <div id="outerSwatch" class="big-swatch"></div>
+
+      <div class="color-details">
+        <span id="outerChosen" class="color-name"></span>
+        <span id="outerHex" class="color-small"></span>
+      </div>
+
+    </div>
+
+    <div class="select-wrap">
+      <select id="outer"></select>
+    </div>
+
+  </div>
+
+
+  <!-- INNER -->
+
+  <div class="color-section">
+
+    <div class="color-head">
+      <label class="color-title">اللون الداخلي</label>
+      <span id="innerCode" class="color-code"></span>
+    </div>
+
+    <div class="color-preview">
+
+      <div id="innerSwatch" class="big-swatch"></div>
+
+      <div class="color-details">
+        <span id="innerChosen" class="color-name"></span>
+        <span id="innerHex" class="color-small"></span>
+      </div>
+
+    </div>
+
+    <div class="select-wrap">
+      <select id="inner"></select>
+    </div>
+
+  </div>
+
+
+  <!-- COMBO -->
+
+  <div class="combo-box">
+
+    <span class="combo-label">
+      التركيبة الحالية
+    </span>
+
+    <b id="combo" class="combo-value"></b>
+
+  </div>
+
+
+  <!-- DOWNLOAD -->
+
+  <a id="download" class="download" download>
+    <span>↓</span>
+    تحميل الصورة الحالية
+  </a>
+
+</aside>
+
+</main>
+
+
+<!-- PALETTE -->
+
+<section class="palette">
+
+  <div class="palette-head">
+
+    <h2 class="palette-title">
+      كتالوج الألوان
+    </h2>
+
+    <p class="palette-description">
+      اضغط على أي لون لتطبيقه كقماش خارجي
+    </p>
+
+  </div>
+
+  <div id="palette" class="grid"></div>
+
+</section>
+
+
+<footer>
+
+  <span class="footer-brand">
+    LIWAN COLOR STUDIO
+  </span>
+
+  <span>
+    اختيارك، بصمتك.
+  </span>
+
+  <span>
+    © 2026 LIWAN
+  </span>
+
+</footer>
+
+</div>
+
+
+<script>
+
+const raw =
+'01|off_white_beige|أوف وايت بيج|#B8B6AA;' +
+'02|warm_beige|بيج دافئ|#B2AD99;' +
+'03|greige|بيج رمادي|#A09C89;' +
+'04|taupe|تاوب بني رمادي|#8D826E;' +
+'05|medium_gray_beige|رمادي بيج متوسط|#827C70;' +
+'06|dark_brown_gray|بني رمادي داكن|#716A5A;' +
+'07|dark_wood_brown|بني خشبي داكن|#58402D;' +
+'08|brown_black|بني أسود|#251C17;' +
+'09|mustard_gold|خردلي ذهبي|#6E4B22;' +
+'10|burgundy|عنابي نبيذي|#2B1518;' +
+'11|dark_olive|أخضر زيتي داكن|#333924;' +
+'12|blue_gray|أزرق رمادي بترولي|#6A7B73;' +
+'13|dark_blue_gray|أزرق رمادي داكن|#232936;' +
+'14|deep_navy|كحلي شديد الغمقان|#111520;' +
+'15|gray_off_white|أوف وايت رمادي|#ABABA3;' +
+'16|warm_light_gray|رمادي فاتح دافئ|#99968F;' +
+'17|medium_gray|رمادي متوسط|#605F5D;' +
+'18|charcoal|فحمي داكن|#212226;' +
+'19|black|أسود|#111112';
+
+
+const colors = raw.split(';').map(x => {
+
+  let [id,slug,name,hex] = x.split('|');
+
+  return {
+    id,
+    slug,
+    name,
+    hex
+  };
+
+});
+
+
+let outer = 4;
+let inner = 10;
+
+
+const $ = id => document.getElementById(id);
+
+
+/* =========================
+   SELECT OPTIONS
+========================= */
+
+function opt(el){
+
+  el.innerHTML = colors.map(c => `
+    <option value="${c.id}">
+      ${c.id} — ${c.name}
+    </option>
+  `).join('');
+
+}
+
+
+/* =========================
+   CURRENT PRODUCT
+========================= */
+
+function current(){
+
+  const o = colors[outer - 1];
+  const i = colors[inner - 1];
+
+  const file =
+    `outer_${o.id}_${o.slug}__inner_${i.id}_${i.slug}.jpg`;
+
+
+  /* PRODUCT */
+
+  $('product').src = 'images/' + file;
+
+  $('product').alt =
+    `سترة Liwan — خارجي ${o.name} وداخلي ${i.name}`;
+
+
+  /* NAMES */
+
+  $('outerName').textContent = o.name;
+  $('innerName').textContent = i.name;
+
+
+  /* OUTER */
+
+  $('outerChosen').textContent =
+    `${o.id} · ${o.name}`;
+
+  $('outerHex').textContent =
+    o.hex;
+
+  $('outerCode').textContent =
+    o.id;
+
+
+  $('outerSwatch').style.background =
+    o.hex;
+
+
+  /* INNER */
+
+  $('innerChosen').textContent =
+    `${i.id} · ${i.name}`;
+
+  $('innerHex').textContent =
+    i.hex;
+
+  $('innerCode').textContent =
+    i.id;
+
+
+  $('innerSwatch').style.background =
+    i.hex;
+
+
+  /* COMBINATION */
+
+  $('combo').textContent =
+    `${o.id} + ${i.id}`;
+
+
+  /* DOWNLOAD */
+
+  $('download').href =
+    'images/' + file;
+
+  $('download').download =
+    `liwan-outer-${o.id}-inner-${i.id}.jpg`;
+
+
+  /* ACTIVE PALETTE */
+
+  document
+    .querySelectorAll('.palette-item')
+    .forEach(b => {
+
+      b.classList.toggle(
+        'active',
+        +b.dataset.id === outer
+      );
+
+    });
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+opt($('outer'));
+opt($('inner'));
+
+$('outer').value = outer;
+$('inner').value = inner;
+
+
+/* =========================
+   SELECT EVENTS
+========================= */
+
+$('outer').onchange = e => {
+
+  outer = +e.target.value;
+
+  current();
+
+};
+
+
+$('inner').onchange = e => {
+
+  inner = +e.target.value;
+
+  current();
+
+};
+
+
+/* =========================
+   PALETTE
+========================= */
+
+$('palette').innerHTML =
+  colors.map(c => `
+
+    <button
+      class="palette-item"
+      data-id="${c.id}"
+      title="تطبيق ${c.name} كخارجية"
+    >
+
+      <span
+        class="swatch"
+        style="background:${c.hex}"
+      ></span>
+
+      <span class="num">
+        ${c.id}
+      </span>
+
+    </button>
+
+  `).join('');
+
+
+document
+  .querySelectorAll('.palette-item')
+  .forEach(b => {
+
+    b.onclick = () => {
+
+      outer = +b.dataset.id;
+
+      $('outer').value = outer;
+
+      current();
+
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      });
+
+    };
+
+  });
+
+
+current();
+
+</script>
+
+</body>
+</html>
